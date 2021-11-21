@@ -24,6 +24,7 @@ public class PanelInventario extends JPanel implements ActionListener
      * Opción buscar.
      */
     public final static String REVISAR = "REVISAR";
+    public final static String REGRESAR = "REGRESAR";
     
     private JButton bEliminar;
 
@@ -36,6 +37,7 @@ public class PanelInventario extends JPanel implements ActionListener
      * Botón de búsqueda.
      */
     private JButton bRevisar;
+    private JButton bRegresar;
     
     private Supermercado ventana;
     
@@ -62,10 +64,16 @@ public class PanelInventario extends JPanel implements ActionListener
         add( bAgregar );
 
         // Botón buscar pasajero
+        bRegresar = new JButton( "Revisar lotes" );
+        bRegresar.setActionCommand( REVISAR );
+        bRegresar.addActionListener( this );
+        add( bRegresar );
+        
         bRevisar = new JButton( "Regresar al inicio" );
-        bRevisar.setActionCommand( REVISAR );
+        bRevisar.setActionCommand( REGRESAR );
         bRevisar.addActionListener( this );
         add( bRevisar );
+        
         
     }
 	@Override
@@ -84,6 +92,10 @@ public class PanelInventario extends JPanel implements ActionListener
         else if( comando.equals( REVISAR ) )
         {
             ventana.revisarProducto( );
+        }
+        else if( comando.equals( REGRESAR ) )
+        {
+            ventana.regresar();
         }
 	}
 }

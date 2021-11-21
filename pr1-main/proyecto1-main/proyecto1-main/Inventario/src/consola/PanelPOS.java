@@ -45,7 +45,7 @@ public class PanelPOS extends JPanel implements ActionListener
         ventana = pVentana;
 
         // Configura propiedades visuales
-        setLayout( new GridLayout( 2, 4, 8, 2 ) );
+        setLayout( new GridLayout( 3, 4, 8, 5 ) );
         setBorder( new EmptyBorder( 5, 5, 5, 5 ) );
 
         // Botón registrar
