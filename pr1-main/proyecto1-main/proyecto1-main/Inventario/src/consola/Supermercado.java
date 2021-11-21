@@ -24,6 +24,9 @@ public class Supermercado extends JFrame
 
 
     private JPanel panelAplicaciones;
+    private DialogoAsignacion dAsignacion;
+    private POS pos;
+
 
   
     public Supermercado( )
@@ -33,19 +36,14 @@ public class Supermercado extends JFrame
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
 
-	ArrayList<producto> productos = ejecutarCargarProductos("./data/productos.txt");  // el parametro es la ruta del archivo productos.txt dentro del proyecto Eclipse
-	for (producto prod : productos)
-		System.out.println(prod);
-	
-
-	ArrayList<lote> lotes = ejecutarCargarLotes("./data/lotes.txt");  // parametros: ruta del archivo lotes.txt 
-		System.out.println(lotes);
+	pos = new POS();
 		
 
     // Configura la interfaz
     setLayout( new BorderLayout( ) );
 
-
+    pos.agregarproductos(ejecutarCargarProductos("./data/productos.txt")) ;  // el parametro es la ruta del archivo productos.txt dentro del proyecto Eclipse
+	pos.agregarLotes(ejecutarCargarLotes("./data/lotes.txt")) ;  // parametros: ruta del archivo lotes.txt 
 
     // Panel de botones
     panelAplicaciones = new PanelAplicaciones( this );
@@ -64,6 +62,7 @@ public void iniciarPOS()
 	
 	panelAplicaciones = new PanelPOS( this );
 	add( panelAplicaciones, BorderLayout.CENTER );
+	validate();
 }
 
 public void iniciarInventario()
@@ -72,20 +71,27 @@ public void iniciarInventario()
 	
 	panelAplicaciones = new PanelInventario( this );
 	add( panelAplicaciones, BorderLayout.CENTER );
+	validate();
+
 }
 
 public void registrarCliente( )
 {
-	
+    dAsignacion = new DialogoAsignacion( this, pos );
+    dAsignacion.setVisible( true );
+	validate();
+
 }
 
 public void nuevoPedido( )
 {
 	remove( panelAplicaciones );
 	
-	panelAplicaciones = new PanelAplicaciones( this );
+	panelAplicaciones = new PanelPedido( this, pos );
 	add( panelAplicaciones, BorderLayout.CENTER );
+	validate();
 }
+
 
 public void eliminarLotes()
 {
@@ -94,7 +100,11 @@ public void eliminarLotes()
 
 public void agregarLotes()
 {
+remove( panelAplicaciones );
 	
+	panelAplicaciones = new PanelAgregar( this, pos );
+	add( panelAplicaciones, BorderLayout.CENTER );
+	validate();
 }
 
 public void revisarProducto()
@@ -105,48 +115,54 @@ public void regresar( )
 {
 	remove( panelAplicaciones );
 	
-	panelAplicaciones = new PanelPOS( this );
+	panelAplicaciones = new PanelAplicaciones( this );
 	add( panelAplicaciones, BorderLayout.CENTER );
+	validate();
 }
 	 
-	private ArrayList<producto> ejecutarCargarProductos(String rutaArchivo)
+	public ArrayList<producto> ejecutarCargarProductos(String rutaArchivo)
 	{
 		ArrayList<producto> productos = new ArrayList<producto>();
 		try
 		{
 			productos = loader.leerInfoArchivoProducto(rutaArchivo);
-			System.out.println("OK Se cargó el archivo " + rutaArchivo + " con información de los productos.");
+            JOptionPane.showMessageDialog( this,"OK Se cargó el archivo " + rutaArchivo + " con información de los productos.", "Archivo", JOptionPane.INFORMATION_MESSAGE );
+			
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("ERROR: el archivo " + rutaArchivo + " no se encontró.");
+			System.out.println();
+            JOptionPane.showMessageDialog( this, "ERROR: el archivo " + rutaArchivo + " no se encontró.", "Archivo", JOptionPane.ERROR_MESSAGE );
 			System.out.println(e.getMessage());
 		}
 		catch (IOException e)
 		{
-			System.out.println("ERROR: hubo un problema leyendo el archivo " + rutaArchivo);
+            JOptionPane.showMessageDialog( this, "ERROR: hubo un problema leyendo el archivo \" + rutaArchivo", "Archivo", JOptionPane.ERROR_MESSAGE );	
 			System.out.println(e.getMessage());
 		}
 
 		return productos;
 	}
 	
-	private ArrayList<lote> ejecutarCargarLotes(String rutaArchivo)
+	public ArrayList<lote> ejecutarCargarLotes(String rutaArchivo)
 	{
 		ArrayList<lote> lotes = new ArrayList<lote>();
 		try
 		{
 			lotes = loader.leerInfoArchivoLotes(rutaArchivo);
+            JOptionPane.showMessageDialog( this,"OK Se cargó el archivo " + rutaArchivo + " con información de los productos.", "Archivo", JOptionPane.INFORMATION_MESSAGE );
 			System.out.println("OK Se cargó el archivo " + rutaArchivo + " con información de los productos.");
 		}
 		catch (FileNotFoundException e)
 		{
 			System.out.println("ERROR: el archivo " + rutaArchivo + " no se encontró.");
+            JOptionPane.showMessageDialog( this, "ERROR: el archivo " + rutaArchivo + " no se encontró.", "Archivo", JOptionPane.ERROR_MESSAGE );
 			System.out.println(e.getMessage());
 		}
 		catch (IOException e)
 		{
 			System.out.println("ERROR: hubo un problema leyendo el archivo " + rutaArchivo);
+            JOptionPane.showMessageDialog( this, "ERROR: hubo un problema leyendo el archivo \" + rutaArchivo", "Archivo", JOptionPane.ERROR_MESSAGE );	
 			System.out.println(e.getMessage());
 		}
 
@@ -156,7 +172,6 @@ public void regresar( )
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
 		
 			try
 	        {

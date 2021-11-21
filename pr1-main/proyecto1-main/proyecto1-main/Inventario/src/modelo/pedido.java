@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class pedido {
 	private ArrayList<producto> Productos;
+	public pedido()
+	{
+		this.Productos = new ArrayList<producto>();
+	}
 	
 	public void agregarProducto(producto Producto)
 	{

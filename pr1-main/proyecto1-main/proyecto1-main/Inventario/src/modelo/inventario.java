@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 public class inventario {
 	private HashMap<String, lote> inventario;
+	public inventario() 
+	{
+		this.inventario = new HashMap<String, lote>();
+	}
 	public boolean verificarDisponibilidad(String nombreProducto)
 	{
 		boolean contiene = inventario.containsKey(nombreProducto);
