@@ -22,7 +22,6 @@ public class Supermercado extends JFrame
     // -----------------------------------------------------------------
 
 
-
     private JPanel panelAplicaciones;
     private DialogoAsignacion dAsignacion;
     private POS pos;
@@ -107,10 +106,12 @@ remove( panelAplicaciones );
 	validate();
 }
 
-public void revisarProducto()
+public void actualizarpos(POS Pos)
 {
-	
+	pos = Pos;
 }
+
+
 public void regresar( )
 {
 	remove( panelAplicaciones );

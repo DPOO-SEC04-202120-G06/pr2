@@ -74,6 +74,8 @@ public class DialogoProducto extends JDialog implements ActionListener
     	String nombre = Cbarras.getText();
     	producto Producto = pos.getProducto(nombre);
     	Pedido.agregarProducto(Producto);
+    	PanelPedido PanelP = new PanelPedido(principal,pos);
+    	PanelP.mostrarProducto(Producto);
     	dispose();
     }
     public void inicializarPanelBotones( )

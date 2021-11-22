@@ -126,6 +126,7 @@ public class DialogoAsignacion extends JDialog implements ActionListener
                     else
                     {
                       pos.registarCliente(Cliente);
+                      principal.actualizarpos(pos);
                       dispose();
                     }
                   
