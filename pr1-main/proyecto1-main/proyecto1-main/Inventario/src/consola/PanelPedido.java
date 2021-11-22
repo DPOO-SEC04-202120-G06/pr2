@@ -2,7 +2,6 @@ package consola;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -11,14 +10,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import modelo.*;
 
@@ -117,9 +111,22 @@ public class PanelPedido extends JPanel implements ActionListener
     	dPedido = new DialogoProducto( ventana, pos,Pedido );
     	dPedido.setVisible( true );
     	validate();
-    	JPanel PanelProducto = new JPanel();
     	
     }
+    
+    public void mostrarProducto(producto Producto)
+    {
+    	JPanel PanelProducto = new JPanel();
+    	PanelProducto.setLayout( new FlowLayout( FlowLayout.RIGHT, 5, 0 ) );
+    	String nombre = Producto.getNombre();
+        JLabel etiquetaNombre = new JLabel(nombre +(" ".repeat(100-nombre.length())));
+        JLabel etiquetaPrecio = new JLabel(Double.toString(Producto.getPrecio()));
+        PanelProducto.add( etiquetaNombre );
+        PanelProducto.add( etiquetaPrecio );
+        PanelProductos.add( PanelProducto );
+    }
+
+    
 
     @Override
     public void actionPerformed( ActionEvent pEvento )

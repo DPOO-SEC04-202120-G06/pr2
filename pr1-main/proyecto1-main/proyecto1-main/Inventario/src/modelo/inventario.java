@@ -36,4 +36,8 @@ public class inventario {
 		}
 	}
 	
+	public HashMap<String, lote> getinventario()
+	{
+		return inventario;
+	}
 	}

@@ -23,7 +23,6 @@ public class PanelInventario extends JPanel implements ActionListener
     /**
      * Opción buscar.
      */
-    public final static String REVISAR = "REVISAR";
     public final static String REGRESAR = "REGRESAR";
     
     private JButton bEliminar;
@@ -36,7 +35,6 @@ public class PanelInventario extends JPanel implements ActionListener
     /**
      * Botón de búsqueda.
      */
-    private JButton bRevisar;
     private JButton bRegresar;
     
     private Supermercado ventana;
@@ -47,7 +45,7 @@ public class PanelInventario extends JPanel implements ActionListener
         ventana = pVentana;
 
         // Configura propiedades visuales
-        setLayout( new GridLayout( 2, 4, 8, 2 ) );
+        setLayout( new GridLayout( 3, 1, 8, 2 ) );
         setBorder( new EmptyBorder( 5, 5, 5, 5 ) );
 
         // Botón registrar
@@ -63,16 +61,10 @@ public class PanelInventario extends JPanel implements ActionListener
         bAgregar.addActionListener( this );
         add( bAgregar );
 
-        // Botón buscar pasajero
-        bRegresar = new JButton( "Revisar lotes" );
-        bRegresar.setActionCommand( REVISAR );
+        bRegresar = new JButton( "Regresar al inicio" );
+        bRegresar.setActionCommand( REGRESAR );
         bRegresar.addActionListener( this );
         add( bRegresar );
-        
-        bRevisar = new JButton( "Regresar al inicio" );
-        bRevisar.setActionCommand( REGRESAR );
-        bRevisar.addActionListener( this );
-        add( bRevisar );
         
         
     }
@@ -88,10 +80,6 @@ public class PanelInventario extends JPanel implements ActionListener
         else if( comando.equals( AGREGAR ) )
         {
             ventana.agregarLotes( );
-        }
-        else if( comando.equals( REVISAR ) )
-        {
-            ventana.revisarProducto( );
         }
         else if( comando.equals( REGRESAR ) )
         {
